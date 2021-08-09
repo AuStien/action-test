@@ -22,3 +22,5 @@ jobs:
       - name: Echo version
         run: |
           echo "TAG: ${{ steps.meta.outputs.tags }}"
+      - name: Hmm
+        run: echo "EOL"
