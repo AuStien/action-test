@@ -17,6 +17,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
+          images: hello/world
           tags: |
             type=semver,pattern={{version}}
       - name: Echo version
