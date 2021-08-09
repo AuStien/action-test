@@ -1,0 +1,24 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+    - 'v*.*.*'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Get metadata
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          tags: |
+            type=semver,pattern={{version}}
+      - name: Echo version
+        run: |
+          echo "TAG: ${{ steps.meta.outputs.tags }}"
