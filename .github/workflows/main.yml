@@ -25,8 +25,8 @@ jobs:
       - name: Get tag
         run: export TAG=${GITHUB_REF/refs\/tags\//}
       - name: Make semver
-        run: export SEMVER=$TAG:1
+        run: export SEMVER=${TAG:1}
       - name: Set envvar
-        run: echo "TAG=$SEMVER" >> $GITHUB_ENV
+        run: echo "TAG=${SEMVER}" >> $GITHUB_ENV
       - name: Echo tag
         run: echo ${{ env.TAG }}
