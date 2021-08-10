@@ -24,3 +24,9 @@ jobs:
           echo "TAG: ${{ steps.meta.outputs.tags }}"
       - name: Hmm
         run: echo "EOL"
+      - name: Get tag
+        run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+      - name: Echo tag
+        run: echo ${{ env.TAG }}
+      - name: Echo tag without v
+        run: echo ${{ env.TAG:1 }}
