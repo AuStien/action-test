@@ -29,4 +29,4 @@ jobs:
       - name: Echo tag
         run: echo ${{ env.TAG }}
       - name: Echo tag without v
-        run: echo ${{ env.TAG:1 }}
+        run: echo ${{ env.TAG }:1}
