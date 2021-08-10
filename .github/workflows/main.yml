@@ -11,26 +11,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Get metadata
-        id: meta
-        uses: docker/metadata-action@v3
-        with:
-          images: hello/world
-          tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}
-      - name: Echo version
-        run: |
-          echo "TAG: ${{ steps.meta.outputs.tags }}"
+      # - name: Get metadata
+      #   id: meta
+      #   uses: docker/metadata-action@v3
+      #   with:
+      #     images: hello/world
+      #     tags: |
+      #       type=semver,pattern={{version}}
+      #       type=semver,pattern={{major}}
+      # - name: Echo version
+      #   run: |
+      #     echo "TAG: ${{ steps.meta.outputs.tags }}"
       - name: Get tag
         run: |
-          export TAG=${GITHUB_REF/refs\/tags\//}
-          echo $TAG
+          export TAGS=${GITHUB_REF/refs\/tags\//}
+          echo $TAGS
       - name: Make semver
         run: |
-          export SEMVER=${TAG:1}
+          export SEMVER=${TAGS:1}
           echo $SEMVER
       - name: Set envvar
-        run: echo "TAG=${SEMVER}" >> $GITHUB_ENV
+        run: echo "TAGS=${SEMVER}" >> $GITHUB_ENV
       - name: Echo tag
-        run: echo ${{ env.TAG }}
+        run: echo ${{ env.TAGS }}
