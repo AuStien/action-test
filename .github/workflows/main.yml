@@ -22,12 +22,14 @@ jobs:
       # - name: Echo version
       #   run: |
       #     echo "TAG: ${{ steps.meta.outputs.tags }}"
-      - name: Get tag
-        run: |
-          export TAGS=${GITHUB_REF/refs\/tags\//}
-          export SEMVER=${TAGS:1}
-          echo "TAGS=${SEMVER}" >> $GITHUB_ENV
-      - name: Echo tag
-        run: echo ${{ env.TAGS }}
+      # - name: Get tag
+      #   run: |
+      #     export TAGS=${GITHUB_REF/refs\/tags\//}
+      #     export SEMVER=${TAGS:1}
+      #     echo "TAGS=${SEMVER}" >> $GITHUB_ENV
+      # - name: Echo tag
+      #   run: echo ${{ env.TAGS }}
+      - run: npm install -g yarn
       - name: Does yarn here?
         run: which yarn
+      - run: ls /usr/local/lib
