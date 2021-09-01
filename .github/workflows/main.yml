@@ -29,3 +29,5 @@ jobs:
           echo "TAGS=${SEMVER}" >> $GITHUB_ENV
       - name: Echo tag
         run: echo ${{ env.TAGS }}
+      - name: Does yarn here?
+        run: yarn -v
