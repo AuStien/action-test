@@ -30,4 +30,4 @@ jobs:
       - name: Echo tag
         run: echo ${{ env.TAGS }}
       - name: Does yarn here?
-        run: yarn -v
+        run: which yarn
