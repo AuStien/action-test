@@ -27,4 +27,4 @@ jobs:
         run: |
           (git show-branch latest-new &>/dev/null) && (git checkout latest-new) || (git checkout -b latest-new)
       - name: Mark latest release as using git branch
-        run: git rebase ${{ github.sha }}
+        run: git rebase ${{ github.sha }} && git push -f origin latest-new
