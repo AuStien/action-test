@@ -2,36 +2,29 @@ name: Main
 
 on:
   push:
-    tags:
-    - 'v*.*.*'
 
 jobs:
-  docker:
+  update-latest:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      # - name: Get metadata
-      #   id: meta
-      #   uses: docker/metadata-action@v3
-      #   with:
-      #     images: hello/world
-      #     tags: |
-      #       type=semver,pattern={{version}}
-      #       type=semver,pattern={{major}}
-      # - name: Echo version
-      #   run: |
-      #     echo "TAG: ${{ steps.meta.outputs.tags }}"
-      # - name: Get tag
-      #   run: |
-      #     export TAGS=${GITHUB_REF/refs\/tags\//}
-      #     export SEMVER=${TAGS:1}
-      #     echo "TAGS=${SEMVER}" >> $GITHUB_ENV
-      # - name: Echo tag
-      #   run: echo ${{ env.TAGS }}
-      - run: npm install -g yarn
-      - name: Does yarn here?
-        run: which yarn
-      - run: ls /usr/local/lib/node_modules
-      - run: ls /usr/local/lib/node_modules/yarn
-      - run: ls /usr/local/lib/node_modules/yarn/bin
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Validate latest branch exists
+        run: |
+          (git show-branch latest &>/dev/null) && (git checkout latest) || (git checkout -b latest)
+      - name: Mark latest release as using git branch
+        run: git branch --force latest ${{ github.sha }} && git push --force origin latest
+  update-latest-new:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Validate latest branch exists
+        run: |
+          (git show-branch latest-new &>/dev/null) && (git checkout latest-new) || (git checkout -b latest-new)
+      - name: Mark latest release as using git branch
+        run: git rebase ${{ github.sha }}
