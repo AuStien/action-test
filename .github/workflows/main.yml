@@ -6,12 +6,17 @@ on:
 jobs:
   set-version:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.echo.version }}
     steps:
       - name: echo
-        run: echo "VERSION=v1.2.3" >> $GITHUB_OUTPUT
+        id: version
+        run: echo "version=v1.2.3" >> $GITHUB_OUTPUT
   rewrite-version:
     runs-on: ubuntu-latest
     needs: set-version
     steps:
+      - name: Print version
+        run: echo ${{ needs.set-version.outputs.version }}
       - name: Remove prefix
-        run: echo ${${{ needs.set-version.outputs.VERSION }}#v}
+        run: echo ${${{ needs.set-version.outputs.version }}#v}
