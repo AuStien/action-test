@@ -14,4 +14,4 @@ jobs:
     needs: set-version
     steps:
       - name: Remove prefix
-        run: echo ${{ needs.set-version.outputs.VERSION }#v}
+        run: echo ${${{ needs.set-version.outputs.VERSION }}#v}
