@@ -18,4 +18,6 @@ jobs:
       - name: Print version
         run: echo ${{ needs.set-version.outputs.version }}
       - name: Remove prefix
-        run: echo ${${{ needs.set-version.outputs.version }}#v}
+        run: echo ${{ needs.set-version.outputs.version#v }}
+      - name: Remove prefix
+        run: VERSION=${{ needs.set-version.outputs.version }} echo ${VERSION#v}
