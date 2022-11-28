@@ -7,10 +7,9 @@ jobs:
   set-version:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.echo.outputs.version }}
+      version: ${{ steps.version.outputs.version }}
     steps:
-      - name: echo
-        id: version
+      - id: version
         run: echo "version=v1.2.3" >> $GITHUB_OUTPUT
   rewrite-version:
     runs-on: ubuntu-latest
