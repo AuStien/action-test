@@ -7,7 +7,7 @@ jobs:
   set-version:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.echo.version }}
+      version: ${{ steps.echo.outputs.version }}
     steps:
       - name: echo
         id: version
