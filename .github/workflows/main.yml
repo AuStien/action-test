@@ -17,5 +17,7 @@ jobs:
     steps:
       - name: Print version
         run: echo ${{ needs.set-version.outputs.version }}
+      - name: Export version
+        run: export VERSION=${{ needs.set-version.outputs.version }}
       - name: Remove prefix
-        run: export VERSION=${{ needs.set-version.outputs.version }} && echo ${VERSION#v}
+        run: echo ${VERSION#v}
