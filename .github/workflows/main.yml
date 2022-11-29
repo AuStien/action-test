@@ -7,4 +7,4 @@ jobs:
   dry:
     uses: austien/action-test/.github/workflows/dryrun.yaml@main
     with:
-      dry-run: true
+      dry-run: false
