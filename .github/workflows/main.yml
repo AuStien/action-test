@@ -2,17 +2,20 @@ name: Main
 
 on:
   push:
+  workflow_call:
+    inputs:
+      dry-run:
+        type: boolean
+        default: true
 
 jobs:
   set-version:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
-      dry-run: ${{ steps.version.outputs.dry-run }}
     steps:
       - id: version
         run: echo "version=v1.2.3" >> $GITHUB_OUTPUT
-      - run: echo "dry-run=true" >> $GITHUB_OUTPUT
   rewrite-version:
     runs-on: ubuntu-latest
     needs: set-version
@@ -23,5 +26,7 @@ jobs:
         run: export VERSION=${{ needs.set-version.outputs.version }}
       - name: Remove prefix
         run: echo ${VERSION#v}
-      - if: ${{ !needs.set-version.outputs.dry-run }}
+      - if: ${{ !inputs.dry-run }}
         run: echo Wet run!
+      - if: ${{ inputs.dry-run }}
+        run: echo Dry run!
