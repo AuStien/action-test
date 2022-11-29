@@ -6,7 +6,7 @@ on:
     inputs:
       dry-run:
         type: boolean
-        default: false
+        default: true
 
 jobs:
   dry:
