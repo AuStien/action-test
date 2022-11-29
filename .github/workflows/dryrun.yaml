@@ -1,0 +1,22 @@
+name: Dryrun
+
+on:
+  workflow_call:
+    inputs:
+      dry-run:
+        type: boolean
+        default: true
+
+jobs:
+  dry:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ inputs.dry-run }}
+      - if: ${{ !inputs.dry-run }}
+        run: echo Wet run!
+      - if: ${{ inputs.dry-run }}
+        run: echo Dry run!
+      - if: (${{ inputs.dry-run }} != true )
+        run: echo Wet run!
+      - if: (!${{ inputs.dry-run }})
+        run: echo Wet run!
