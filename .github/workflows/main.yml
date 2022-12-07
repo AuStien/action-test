@@ -1,16 +1,13 @@
 name: PR approved and labeled
 
 on:
-  pull_request_review:
-    types: [submitted]
+  push:
 
 jobs:
-  build:
+  dump:
     runs-on: ubuntu-latest
-    if: ${{ github.event.review.state == 'approved' }}
     steps:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
-      - run: echo ${{ github.event.review.state }}
