@@ -1,10 +1,16 @@
-name: Main
+name: PR approved and labeled
 
 on:
-  push:
+  pull_request_review:
+    types: [submitted]
 
 jobs:
-  dry:
-    uses: austien/action-test/.github/workflows/dryrun.yaml@main
-    with:
-      dry-run: false
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.review.state == 'approved' }}
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - run: echo ${{ github.event.review.state }}
