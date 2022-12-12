@@ -16,4 +16,3 @@ jobs:
       dry-run: true
       sha256: not-used
       kosli-pipeline: not-used
-
