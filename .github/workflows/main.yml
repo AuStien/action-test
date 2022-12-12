@@ -2,12 +2,18 @@ name: PR approved and labeled
 
 on:
   push:
+    branches:
+      - main
 
 jobs:
-  dump:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+  version:
+    uses: stacc/github-workflow-actions/.github/workflows/reusable_report-approval.yaml@ci/report-approval
+    secrets:
+      kosli-token: not-used
+      github-token: ${{ github.token }}
+    with:
+      name: not-used
+      dry-run: true
+      sha256: not-used
+      kosli-pipeline: not-used
+
