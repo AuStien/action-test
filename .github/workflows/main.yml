@@ -10,7 +10,7 @@ jobs:
     uses: stacc/github-workflow-actions/.github/workflows/reusable_report-approval.yaml@ci/report-approval
     secrets:
       kosli-token: not-used
-      github-token: $GITHUB_TOKEN
+      github-token: ${{ secrets.GITHUB_TOKEN }}
     with:
       name: not-used
       dry-run: true
