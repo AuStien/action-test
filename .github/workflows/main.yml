@@ -1,4 +1,4 @@
-name: PR approved and labeled
+name: Blocc CLI setup
 
 on:
   push:
@@ -7,12 +7,10 @@ on:
 
 jobs:
   version:
-    uses: stacc/github-workflow-actions/.github/workflows/reusable_report-approval.yaml@ci/report-approval
-    secrets:
-      kosli-token: not-used
-      github-token: ${{ secrets.GITHUB_TOKEN }}
-    with:
-      name: not-used
-      dry-run: true
-      sha256: not-used
-      kosli-pipeline: not-used
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup blocc
+      uses: stacc/setup-blocc-cli@main
+    - name: Print version
+      run: |
+        blocc --version
