@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup blocc
-      uses: stacc/setup-blocc-cli@main
+      uses: stacc/setup-blocc-cli@v1
     - name: Print version
       run: |
         blocc --version
