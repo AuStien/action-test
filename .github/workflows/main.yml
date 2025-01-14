@@ -1,21 +1,18 @@
-name: Test stuff
+name: release-please
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
-  version:
+  release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
+      - uses: googleapis/release-please-action@v4
         with:
-          images: |
-            make-testing-workflows-easier-pls
-          tags: |
-            type=semver,pattern={{version}}
-
+          release-type: go
